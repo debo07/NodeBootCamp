@@ -12,6 +12,9 @@ connectDB();
 //Initialize express server
 const app = express();
 
+// Body Parser
+app.use(express.json());
+
 if (process.env.ENV === "development") {
     app.use(morgan("dev"));
 }
