@@ -18,7 +18,13 @@ if (process.env.ENV === "development") {
 app.use("/api/v1/bootcamps", bootcamps);
 
 PORT = process.env.PORT || 5000;
-app.listen(
+const server = app.listen(
     PORT,
     console.log(`Server is running in ${process.env.ENV} mode at ${PORT} port`),
 );
+
+//Handle unhandled rejections globally
+process.on("unhandledRejection", (err, promise) => {
+    console.log(`Error : ${err.message}`);
+    server.close(() => process.exit(1));
+});
